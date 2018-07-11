@@ -25,14 +25,14 @@ The following config can be used to pull those parameters into `process.env`.
 ```javascript
 require("aws-parameter-store-env")
   .config({
-    path: "app/production/"
+    path: "app/production/",
     parameters: [
       {
-        name: "DB_HOST",
+        name: "DB_HOST"
       },
       {
         name: "DB_USER",
-        env: "DB_USERNAME",
+        envName: "DB_USERNAME"
       },
       {
         name: "DB_PASS",
@@ -84,7 +84,8 @@ require("aws-parameter-store-env")
         name: "app/production/DB_PASS",
         envName: "DB_PASS"
       }
-    ]
+    ],
+    region: "us-east-1"
   })
   .then(() => {
     const { DB_HOST, DB_USER, DB_PASS } = process.env;
@@ -110,7 +111,8 @@ require("aws-parameter-store-env")
       {
         name: "DB_PASS",
       }
-    ]
+    ],
+    region: "us-east-1"
   })
   .then(() => {
     const { DB_HOST, DB_USER, DB_PASS } = process.env;
@@ -137,10 +139,41 @@ require("aws-parameter-store-env")
         envName: "ENCRYPTED_VAR"
       }
     ],
+    region: "us-east-1",
     withDecryption: false
   })
   .then(() => {
     const { ENCRYPTED_VAR } = process.env;
     // code to run after the environment has been configured
   });
+```
+
+#### Callback
+
+If you prefer callbacks over promises a callback can be passed as a second parameter to config.
+
+```javascript
+require("aws-parameter-store-env").config(
+  {
+    path: "app/production/",
+    parameters: [
+      {
+        name: "DB_HOST"
+      },
+      {
+        name: "DB_USER",
+        envName: "DB_USERNAME"
+      },
+      {
+        name: "DB_PASS",
+        envName: "DB_PASSWORD"
+      }
+    ],
+    region: "us-east-1"
+  },
+  () => {
+    const { DB_HOST, DB_USERNAME, DB_PASSWORD } = process.env;
+    // code to run after the environment has been configured
+  }
+);
 ```
