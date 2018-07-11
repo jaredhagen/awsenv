@@ -1,0 +1,15 @@
+{
+  "name": "awsenv",
+  "version": "0.0.1",
+  "description": "awsenv is a module that loads environment variables from AWS Parameter Store into process.env.",
+  "main": "lib/index.js",
+  "repository": "https://github.com/jaredhagen/awsenv",
+  "author": "jaredhagen",
+  "license": "MIT",
+  "peerDependencies": {
+    "aws-sdk": "^2.1.10"
+  },
+  "devDependencies": {
+    "aws-sdk": "^2.271.1"
+  }
+}
