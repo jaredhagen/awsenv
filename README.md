@@ -1,15 +1,15 @@
-# awsenv
+# aws-parameter-store-env
 
-awsenv is a module that loads environment variables from AWS Parameter Store into process.env.
+aws-parameter-store-env is a module that loads environment variables from AWS Parameter Store into process.env.
 
 ## Install
 
 ```shell
 # with npm
-npm install aws-sdk awsenv
+npm install aws-sdk aws-parameter-store-env
 
 # with yarn
-yarn add aws-sdk awsenv
+yarn add aws-sdk aws-parameter-store-env
 ```
 
 ## Usage
@@ -23,7 +23,7 @@ Assuming the following parameters are defined in the AWS Parameter Store:
 The following config can be used to pull those parameters into `process.env`.
 
 ```javascript
-require("awsenv")
+require("aws-parameter-store-env")
   .config({
     path: "app/production/"
     parameters: [
@@ -66,10 +66,10 @@ Here is an example Parameter object
 
 The `name` attribute of the Parameter object is the name of the attribute to be retrieved from the AWS Parameter Store.
 
-The `envname` attribute of the Parameter object is the name that should be used when applying the parameter value `process.env`. If this attribute isn't defined the `name` attribute will be used when applying the parameter value to `process.env`
+The `envname` attribute of the Parameter object is the name that should be used when applying the parameter value `process.env`. If this attribute isn't defined the `name` attribute will be used.
 
 ```javascript
-require("awsenv")
+require("aws-parameter-store-env")
   .config({
     parameters: [
       {
@@ -97,7 +97,7 @@ require("awsenv")
 The `path` attribute can be used to reduce redundancy in Parameter names.
 
 ```javascript
-require("awsenv")
+require("aws-parameter-store-env")
   .config({
     path: "app/production/"
     parameters: [
@@ -129,7 +129,7 @@ Default: true
 This value is passed passed to `aws-sdk`. It's then used to decide if secure string values should be decrypted by the SDK. See the [AWS documentation](https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_GetParameters.html) for more information.
 
 ```javascript
-require("awsenv")
+require("aws-parameter-store-env")
   .config({
     parameters: [
       {
