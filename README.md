@@ -20,9 +20,9 @@ As early as possible in your application, require and configure awsenv
 // Assuming the following parameters are defined in
 // AWS Parameter Store:
 //
-// - app/development/DB_HOST
-// - app/development/DB_USER
-// - app/development/DB_PASS
+// - app/production/DB_HOST
+// - app/production/DB_USER
+// - app/production/DB_PASS
 //
 // The following config can be used to pull those
 // parameters into process.env
