@@ -1,9 +1,21 @@
 {
   "name": "aws-parameter-store-env",
-  "version": "0.0.0",
-  "description": "aws-parameter-store-env is a module that loads environment variables from AWS Parameter Store into process.env.",
+  "version": "0.0.1",
+  "description": "Loads environment variables from AWS Parameter Store",
   "main": "lib/index.js",
   "repository": "https://github.com/jaredhagen/aws-parameter-store-env",
+  "keywords": [
+    "aws-parameter-store-env",
+    "env",
+    "aws",
+    "ssm",
+    "parameter store",
+    "environment",
+    "variables",
+    "config",
+    "settings"
+  ],
+  "readmeFilename": "README.md",
   "author": "jaredhagen",
   "license": "MIT",
   "peerDependencies": {
