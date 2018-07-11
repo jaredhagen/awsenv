@@ -66,7 +66,7 @@ Here is an example Parameter object
 
 The `name` attribute of the Parameter object is the name of the attribute to be retrieved from the AWS Parameter Store.
 
-The `envname` attribute of the Parameter object is the name that should be used when applying the parameter value `process.env`. If the attribute isn't defined the `name` attribute will be used applying the parameter value to `process.env`
+The `envname` attribute of the Parameter object is the name that should be used when applying the parameter value `process.env`. If this attribute isn't defined the `name` attribute will be used when applying the parameter value to `process.env`
 
 ```javascript
 require("awsenv")
