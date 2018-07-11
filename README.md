@@ -14,22 +14,17 @@ yarn add aws-sdk awsenv
 
 ## Usage
 
-As early as possible in your application, require and configure awsenv
+Assuming the following parameters are defined in the AWS Parameter Store:
+
+- app/production/DB_HOST
+- app/production/DB_USER
+- app/production/DB_PASS
+
+The following config can be used to pull those parameters into `process.env`.
 
 ```javascript
-// Assuming the following parameters are defined in
-// AWS Parameter Store:
-//
-// - app/production/DB_HOST
-// - app/production/DB_USER
-// - app/production/DB_PASS
-//
-// The following config can be used to pull those
-// parameters into process.env
 require("awsenv")
   .config({
-    // path can be used to reduce redundancy when
-    // referencing names from AWS Parameter Store
     path: "app/production/"
     parameters: [
       {
@@ -37,18 +32,17 @@ require("awsenv")
       },
       {
         name: "DB_USER",
+        env: "DB_USERNAME",
       },
       {
         name: "DB_PASS",
-        // envName can be used to rename variables
-        // as they are applied to process.env
         envName: "DB_PASSWORD"
       }
     ],
     region: "us-east-1"
   })
   .then(() => {
-    const { DB_HOST, DB_USER, DB_PASSWORD } = process.env;
+    const { DB_HOST, DB_USERNAME, DB_PASSWORD } = process.env;
     // code to run after the environment has been configured
   });
 ```
