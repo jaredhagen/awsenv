@@ -1,6 +1,6 @@
 {
   "name": "aws-parameter-store-env",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Loads environment variables from AWS Parameter Store",
   "main": "lib/index.js",
   "repository": "https://github.com/jaredhagen/aws-parameter-store-env",
