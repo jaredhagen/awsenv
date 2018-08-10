@@ -1,12 +1,23 @@
-const AWS = require("aws-sdk");
+import * as AWS from "aws-sdk";
+import { isBoolean, isFunction, isString } from "./utils";
 
-const { isBoolean, isFunction, isString } = require("./utils");
+export interface Parameter {
+  name: string;
+  envName: string;
+}
 
-function sanitizePath(path) {
+export interface Config {
+  path: string;
+  parameters: Array<Parameter>;
+  region: string;
+  withDecryption: boolean;
+}
+
+function sanitizePath(path: string) {
   return isString(path) ? path : "";
 }
 
-function sanitizeParameters(parameters) {
+function sanitizeParameters(parameters: Array<Parameter>) {
   return parameters
     .filter(({ name }) => isString(name))
     .map(({ name, envName }) => {
@@ -17,15 +28,15 @@ function sanitizeParameters(parameters) {
     });
 }
 
-function sanitizeRegion(region) {
+function sanitizeRegion(region: string) {
   return isString(region) ? region : undefined;
 }
 
-function sanitizeWithDecryption(withDecryption) {
+function sanitizeWithDecryption(withDecryption: boolean) {
   return isBoolean(withDecryption) ? withDecryption : true;
 }
 
-function sanitizeConfig(config) {
+function sanitizeConfig(config: Config) {
   const path = sanitizePath(config.path);
   const parameters = sanitizeParameters(config.parameters);
   const region = sanitizeRegion(config.region);
@@ -39,11 +50,17 @@ function sanitizeConfig(config) {
   };
 }
 
-function applyParameterToEnv({ envName, value }) {
+function applyParameterToEnv({
+  envName,
+  value
+}: {
+  envName: string;
+  value: string;
+}) {
   process.env[envName] = value;
 }
 
-async function config(config, callback) {
+async function config(config: Config, callback: Function) {
   const sanitizedConfig = sanitizeConfig(config);
 
   const { parameters, path, region, withDecryption } = sanitizedConfig;
@@ -79,10 +96,10 @@ async function config(config, callback) {
 
     const awsParameters = awsResponses.reduce(
       (parameters, awsResponse) => parameters.concat(awsResponse.Parameters),
-      []
+      [] as any
     );
 
-    const parametersWithValues = awsParameters.map(awsParameter => {
+    const parametersWithValues = awsParameters.map((awsParameter: any) => {
       const parameterConfig = parametersWithPath.find(
         ({ name }) => name === awsParameter.Name
       );
