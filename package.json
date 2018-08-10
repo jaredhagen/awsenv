@@ -1,8 +1,9 @@
 {
   "name": "aws-parameter-store-env",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Loads environment variables from AWS Parameter Store",
-  "main": "lib/index.js",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "repository": "https://github.com/jaredhagen/aws-parameter-store-env",
   "keywords": [
     "aws-parameter-store-env",
@@ -22,6 +23,8 @@
     "aws-sdk": "^2.1.10"
   },
   "devDependencies": {
-    "aws-sdk": "^2.271.1"
+    "@types/node": "^10.5.7",
+    "aws-sdk": "^2.271.1",
+    "typescript": "^3.0.1"
   }
 }
