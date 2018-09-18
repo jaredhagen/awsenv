@@ -15,6 +15,8 @@ async function config(options: Options, callback: Function = () => {}) {
   const parameterNames = getParameterNames(parametersWithPath);
 
   const ssm = getSSM(options.region);
+  
+  const withDecryption = (typeof options.withDecryption === 'undefined') ? true : options.withDecryption;
 
   try {
     const parameterPromises = [];
@@ -26,7 +28,7 @@ async function config(options: Options, callback: Function = () => {}) {
         ssm
           .getParameters({
             Names: names,
-            WithDecryption: options.withDecryption
+            WithDecryption: withDecryption
           })
           .promise()
       );
